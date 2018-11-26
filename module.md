@@ -9,7 +9,7 @@
 
 ```bash
 --创建
-ansible all -m user -a 'name=mysql create_hoem=no system=yes shell=/sbin/nologin'
+ansible all -m user -a 'name=mysql create_home=no system=yes shell=/sbin/nologin'
 --删除
 ansible all -m user -a 'name=test remove=yes state=absent'
 --如需更多了解
@@ -62,6 +62,7 @@ ansible all -m cron -a "minute=*/5 job='/usr/sbin/ntpdate  -u asia.pool.ntp.org 
 ### yum模块
 ```bash
 ansible all -m yum -a 'name=crontabs state=present' 
+state：present absent latest
 ```
 
 ### service模块

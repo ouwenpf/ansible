@@ -1,0 +1,2 @@
+- name: mysqld reload
+  shell: /usr/local/mysql/mysqladmin -S /tmp/mysql3360.sock reload -p123456

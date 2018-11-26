@@ -1,0 +1,31 @@
+- name: create system user
+  user: name=mysql create_home=no system=yes shell=/sbin/nologin 
+- name: mkdir directory
+  file: path=/data/mysql/{{ mysqlport }}/{{ item.list }} state=directory owner=mysql group=mysql
+  with_items:
+  - list: data
+  - list: tmp
+  - list: logs
+- name: create mysqld_directory
+  file: path=/application/mysql5.7  state=directory  owner=mysql group=mysql
+- name: create link
+  file: src=/application/mysql5.7  path=/usr/local/mysql   state=link
+- name: copy mysqld
+  copy: src={{ item.list }}   dest=/application/mysql5.7 owner=mysql group=mysql mode=755
+  with_items:
+  - list: mysqld
+  - list: mysql
+- name: cp my.cnf
+  template: src=my.cnf.j2  dest=/data/mysql/{{ mysqlport }}/my.cnf 
+  tags: cnf
+ # notify: mysqld reload
+- name: install lib
+  yum: name={{ item.list }} state=latest 
+  with_items:
+  - list: numactl-libs
+  - list: libaio
+  - list: man
+  when: 
+    - ansible_pkg_mgr == "yum"
+- name: init  mysql
+  shell: /usr/local/mysql/mysqld  --defaults-file=/data/mysql/{{ mysqlport }}/my.cnf --initialize-insecure  
