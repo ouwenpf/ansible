@@ -1,0 +1,4 @@
+- name: install mysql5.7
+  hosts: all
+  roles:
+    - mysql

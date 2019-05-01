@@ -14,6 +14,9 @@ ansible all -m user -a 'name=mysql create_home=no system=yes shell=/sbin/nologin
 ansible all -m user -a 'name=test remove=yes state=absent'
 --如需更多了解
 ansible-doc -s user
+
+ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa
+ssh-copy-id -p52553 192.168.0.100
 ```
 ### ping模块
 

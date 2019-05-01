@@ -41,6 +41,7 @@ mysql/
 - files：存放有copy或script模块等调用的文件   
 - tasks：至少包含一个mail.yml的文件，其它的文件需要在此文件中通过include进行包含   
 - vars：至少包含一个mail.yml的文件，其它的文件需要在此文件中通过include进行包含  
+- group_vars：定义全局的变量，根据不同的角色进行定义相关的文件名和变量
 - handlers：至少包含一个mail.yml的文件，其它的文件需要在此文件中通过include进行包含   
 - templates：templates模块查找所需要模板文件的目录   
 - default：设定默认变量时使用此目录中的main.yml文件  
